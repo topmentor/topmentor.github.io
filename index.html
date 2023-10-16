@@ -1,11 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="utf-8" />
+  <title>Marked in the browser</title>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.2/marked.min.js" ></script> -->
+  <!-- <script src="https://uicdn.toast.com/editor/latest/toastui-editor-viewer.js"></script> -->
+  <script src="lib/toastui-editor-viewer.js"></script>
+  <script src="lib/marked.min.js"></script>
+  <script src="docutil.js"></script>
+
+
+  <!-- Editor's Style -->
+  <!-- <link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor-viewer.min.css" /> -->
+  <link rel="stylesheet" href="lib/toastui-editor-viewer.min.css" />
+
 </head>
+
 <body>
-    Hello World
+  Content
+  <div id="viewer"></div>
+  <div id="content"></div>
+  <script>
+    let mdString = "";
+
+    const viewer = new toastui.Editor({
+      el: document.querySelector('#viewer'), // 에디터를 적용할 요소 (컨테이너)
+      height: 'auto',                        // 에디터 영역의 높이 값 (OOOpx || auto)
+      initialValue: "# Hello"     // 내용의 초기 값으로, 반드시 마크다운 문자열 형태여야 함
+
+    });
+
+    readFileFromURL("./ex1.md", (error, data) => {
+      if (!error) {
+        mdString = data;
+        viewer.setMarkdown(mdString);
+      }
+    });
+
+
+  </script>
 </body>
+
 </html>
